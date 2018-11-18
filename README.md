@@ -1,6 +1,6 @@
 # Bike Search
 
-Simple bike search app created as hobby project. Built with React/Redux/UIkit.
+Simple search app created as hobby project. Built with React/Redux/UIkit.
 
 _App features:_
 
@@ -9,7 +9,7 @@ _App features:_
 - Endless scroll for results
 - PHP + MySQL API Backend
 
-[Demo](https://dev.getyoumedia.com/bike_search/) (search data was collected & parsed from different russian bike shops).
+[Demo](https://dev.getyoumedia.com/bike_search/) (search data was collected & parsed from russian bike shops).
 
 ### Installation
 
@@ -23,7 +23,7 @@ _App features:_
 
 - You'll need hosting with PHP and MySQL for running backend API
 - Create MySQL database and import sample db data and structure from `/api/db_sample.sql`
-- Update db connection config in `/api/dbconfig.php`
+- Update database connection config in `/api/dbconfig.php`
 - Set your API_URL in `/src/components/constants.js`
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
