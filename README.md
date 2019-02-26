@@ -9,7 +9,7 @@ _App features:_
 - Endless scroll for results
 - PHP + MySQL API Backend
 
-[Demo](https://dev.getyoumedia.com/bike_search/) (search data was collected & parsed from russian bike shops).
+[Demo](https://mikhailkarpov87.github.io/bikes-search/) (search data was collected & parsed from russian bike shops).
 
 ### Installation
 
@@ -22,8 +22,8 @@ _App features:_
 ### Backend installation & integration
 
 - You'll need hosting with PHP and MySQL for running backend API
-- Create MySQL database and import sample db data and structure from `/api/db_sample.sql`
-- Update database connection config in `/api/dbconfig.php`
+- Create MySQL database and import sample db data and structure from `/backend/api/db_sample.sql`
+- Update database connection config in `/backend/api/dbconfig.php`
 - Set your API_URL in `/src/components/constants.js`
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

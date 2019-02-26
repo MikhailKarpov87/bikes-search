@@ -1,5 +1,5 @@
 //URL of server API
-export const API_URL = "https://dev.getyoumedia.com/bike_search/api/api.php";
+export const API_URL = "https://backend_url/api.php";
 
 //Search tips to show it SearchTips component
 export const searchTipTexts = ["амортизатор fox", "заднее колесо", "перчатки oakley", "шлем POC"];
