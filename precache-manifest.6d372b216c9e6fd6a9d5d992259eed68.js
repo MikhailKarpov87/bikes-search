@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/bikes-search/static/js/runtime~main.9324f73c.js"
   },
   {
-    "revision": "51bbbabc5e2fe0f94318",
-    "url": "/bikes-search/static/js/main.51bbbabc.chunk.js"
+    "revision": "f4f06b000e0d45748d02",
+    "url": "/bikes-search/static/js/main.f4f06b00.chunk.js"
   },
   {
     "revision": "6d6c00bc07ec1a4408ed",
     "url": "/bikes-search/static/js/2.6d6c00bc.chunk.js"
   },
   {
-    "revision": "51bbbabc5e2fe0f94318",
+    "revision": "f4f06b000e0d45748d02",
     "url": "/bikes-search/static/css/main.0e95837f.chunk.css"
   },
   {
-    "revision": "789e49bfad71a1a0be49f28043ac6299",
+    "revision": "a8bb7faee359a0f63bef4feb7abf12ef",
     "url": "/bikes-search/index.html"
   }
 ];
