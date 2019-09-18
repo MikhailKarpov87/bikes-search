@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import _ from "lodash";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
 
-import ResultItem from "./result_item";
-import Spinner from "../spinner";
-import { fetchData } from "../../actions";
+import ResultItem from './result_item';
+import Spinner from '../spinner';
+import { fetchData } from '../../actions';
 
 class ResultList extends Component {
   componentDidMount() {
-    window.addEventListener("scroll", () => {
+    window.addEventListener('scroll', () => {
       const { scrollingElement } = document;
       if (scrollingElement.scrollTop + window.innerHeight >= scrollingElement.offsetHeight) {
         this.loadMoreResults();
@@ -19,40 +19,32 @@ class ResultList extends Component {
 
   loadMoreResults() {
     const { searchTerm, page, resultsNum, loading, fetchData } = this.props;
-    //  false is for newRequest flag for fetchData() function
-    !loading && page * 10 < resultsNum && fetchData(searchTerm, false);
+    !loading && page * 10 < resultsNum && fetchData(searchTerm, page + 1);
   }
 
-  getCategoryName(id) {
-    return this.props.categories[id] ? this.props.categories[id] : "--";
-  }
+  getCategoryName = id => this.props.categories.find(category => category.id === id).name || '--';
 
-  getShopName(id) {
-    return this.props.shops[id] ? this.props.shops[id] : "--";
-  }
+  getShopName = id => this.props.shops.find(shop => shop.id === id).name || '--';
 
   render() {
     const { resultsNum, searchTerm, results, loading, error } = this.props;
 
-    if (error) {
-      return (
-        <div className="uk-width-1-2@m uk-align-center">
-          <div class="uk-alert-danger" uk-alert>
-            <span class="uk-alert-close" uk-close />
-            <p>Возникла ошибка при загрузке результатов. Попробуйте еще раз.</p>
-          </div>
+    return error ? (
+      <div className='uk-width-1-2@m uk-align-center'>
+        <div class='uk-alert-danger' uk-alert>
+          <span class='uk-alert-close' uk-close />
+          <p>Возникла ошибка при загрузке результатов. Попробуйте еще раз.</p>
         </div>
-      );
-    }
-    return (
-      <div className="uk-width-1-2@m uk-align-center">
+      </div>
+    ) : (
+      <div className='uk-width-1-2@m uk-align-center'>
         {searchTerm && results && (
-          <h4 className="uk-heading-line uk-text-center">
+          <h4 className='uk-heading-line uk-text-center'>
             <span>
               {results
                 ? !!resultsNum
-                  ? "Найдено товаров: " + resultsNum
-                  : "Товаров не найдено :("
+                  ? 'Найдено товаров: ' + resultsNum
+                  : 'Товаров не найдено :('
                 : null}
             </span>
           </h4>
@@ -64,7 +56,7 @@ class ResultList extends Component {
               <ResultItem
                 key={result.id}
                 result={result}
-                shopName={this.getShopName(result.shop_id)}
+                shopName={this.getShopName(result.shop)}
                 catName={this.getCategoryName(result.category)}
               />
             );
@@ -80,19 +72,19 @@ ResultList.propTypes = {
   searchTerm: PropTypes.string,
   filter: PropTypes.shape({
     categories: PropTypes.array.isRequired,
-    shops: PropTypes.array.isRequired
+    shops: PropTypes.array.isRequired,
   }),
   page: PropTypes.number.isRequired,
   resultsNum: PropTypes.number,
   loading: PropTypes.bool.isRequired,
   sort: PropTypes.shape({
     sortBy: PropTypes.string,
-    sortOrder: PropTypes.string
+    sortOrder: PropTypes.string,
   }),
   fetchData: PropTypes.func.isRequired,
-  shops: PropTypes.object.isRequired,
-  categories: PropTypes.object.isRequired,
-  results: PropTypes.array
+  shops: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
+  results: PropTypes.array,
 };
 
 const mapStateToProps = state => {
@@ -106,11 +98,11 @@ const mapStateToProps = state => {
     sort: state.sort,
     page: state.page,
     filter: state.filter,
-    searchTerm: state.searchTerm
+    searchTerm: state.searchTerm,
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchData }
+  { fetchData },
 )(ResultList);

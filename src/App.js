@@ -1,28 +1,27 @@
-import React, { Component } from "react";
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import reducers from "./reducers";
-import thunk from "redux-thunk";
-import { composeWithDevTools } from "redux-devtools-extension";
-import SearchMain from "./components/search";
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reducers from './reducers';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import SearchMain from './components/search';
 
 const initialState = {
-  searchTerm: "",
-  currentSearchTerm: "",
+  searchTerm: '',
   results: {},
-  shops: {},
-  categories: {},
+  shops: [],
+  categories: [],
   loading: false,
   page: 1,
   sort: {
-    sortBy: "",
-    sortOrder: ""
+    sortBy: '',
+    sortOrder: '',
   },
   filter: {
     categories: [],
-    shops: []
+    shops: [],
   },
-  showFilter: false
+  showFilter: false,
 };
 
 const myStore = composeWithDevTools(applyMiddleware(thunk))(createStore);

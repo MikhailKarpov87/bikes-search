@@ -1,39 +1,42 @@
-import React from "react";
-import PropTypes from "prop-types";
-import _ from "lodash";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const FilterList = props => {
-  const { label, list, selected, handleFilter, name } = props;
+  const { label, list, selected, handleFilter, listName } = props;
+
   return (
     <div>
       <label>
         <b>{label}</b>
       </label>
 
-      {_.map(list, (value, key) => (
-        <div key={key}>
-          <input
-            className="uk-checkbox"
-            type="checkbox"
-            key={key}
-            id={key}
-            name={name}
-            checked={selected.includes(key)}
-            onChange={handleFilter}
-          />
-          {value}
-        </div>
-      ))}
+      {list.map(item => {
+        const { id, name } = item;
+        return (
+          <div key={id}>
+            <input
+              className='uk-checkbox'
+              type='checkbox'
+              key={id}
+              id={id}
+              name={name}
+              checked={selected.includes(id)}
+              onChange={e => handleFilter(e, listName)}
+            />
+            {name}
+          </div>
+        );
+      })}
     </div>
   );
 };
 
 FilterList.propTypes = {
   label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  list: PropTypes.object.isRequired,
+  listName: PropTypes.string.isRequired,
+  list: PropTypes.array.isRequired,
   selected: PropTypes.array.isRequired,
-  handleFilter: PropTypes.func.isRequired
+  handleFilter: PropTypes.func.isRequired,
 };
 
 export default FilterList;

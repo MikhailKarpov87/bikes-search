@@ -1,31 +1,25 @@
-import _ from "lodash";
-import { GET_SHOPLIST, GET_CATEGORIES, UPDATE_FILTER } from "../constants";
+import { GET_SHOPLIST, GET_CATEGORIES, UPDATE_FILTER } from '../constants';
 
 export default function(state = {}, action) {
   switch (action.type) {
     case GET_SHOPLIST:
       return {
         ...state,
-        shops: _.keys(action.payload.data)
+        shops: action.payload.data.map(value => value.id),
       };
 
     case GET_CATEGORIES:
       return {
         ...state,
-        categories: _.keys(action.payload.data)
+        categories: action.payload.data.map(value => value.id),
       };
 
     case UPDATE_FILTER:
-      const filterType = action.payload.filterType;
-      //  filterValue is 'checked' value of checbox. If checked = true,
-      //  adding its id value to array, otherwise removing its id from array
-      const filterValue = !action.payload.status
-        ? state[filterType].filter(value => value !== action.payload.id)
-        : [...state[filterType], action.payload.id];
+      const { name, id, checked } = action.payload;
 
       return {
         ...state,
-        [filterType]: filterValue
+        [name]: checked ? [...state[name], +id] : state[name].filter(value => value !== +id),
       };
 
     default:

@@ -1,16 +1,15 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import _ from "lodash";
-
-import FilterList from "./filter_list";
-import { updateFilter } from "../../actions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import FilterList from './filter_list';
+import { updateFilter } from '../../actions';
 
 class SearchFilter extends Component {
-  handleFilter(event) {
-    const value = event.currentTarget;
-    this.props.updateFilter(value.name, value.id, value.checked);
-  }
+  handleFilter = (event, name) => {
+    const { id, checked } = event.currentTarget;
+    console.log(id, checked);
+    this.props.updateFilter({ id, checked, name });
+  };
 
   render() {
     const { filter, shops, categories, showFilter } = this.props;
@@ -18,23 +17,23 @@ class SearchFilter extends Component {
     return (
       <div
         className={`uk-animation-slide-bottom-medium filter-${
-          showFilter & (_.size(shops) > 0) ? "expanded" : "collapsed"
+          showFilter & (shops.length > 0) ? 'expanded' : 'collapsed'
         }`}
       >
         <FilterList
-          label="Магазины"
+          label='Магазины'
           list={shops}
-          name="shops"
+          listName='shops'
           selected={filter.shops}
-          handleFilter={event => this.handleFilter(event)}
+          handleFilter={this.handleFilter}
         />
 
         <FilterList
-          label="Категории"
+          label='Категории'
           list={categories}
-          name="categories"
+          listName='categories'
           selected={filter.categories}
-          handleFilter={event => this.handleFilter(event)}
+          handleFilter={this.handleFilter}
         />
       </div>
     );
@@ -44,12 +43,12 @@ class SearchFilter extends Component {
 SearchFilter.propTypes = {
   filter: PropTypes.shape({
     categories: PropTypes.array.isRequired,
-    shops: PropTypes.array.isRequired
+    shops: PropTypes.array.isRequired,
   }),
-  shops: PropTypes.object,
-  categories: PropTypes.object,
+  shops: PropTypes.array,
+  categories: PropTypes.array,
   showFilter: PropTypes.bool.isRequired,
-  updateFilter: PropTypes.func.isRequired
+  updateFilter: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -57,11 +56,11 @@ const mapStateToProps = state => {
     showFilter: state.showFilter,
     shops: state.shops,
     categories: state.categories,
-    filter: state.filter
+    filter: state.filter,
   };
 };
 
 export default connect(
   mapStateToProps,
-  { updateFilter }
+  { updateFilter },
 )(SearchFilter);
